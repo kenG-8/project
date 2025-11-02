@@ -1,0 +1,67 @@
+body{
+    border: 0,0;
+    padding:0,0;
+    background-image: url('https://wallpaperbat.com/img/181751583-dusk-forest-skyline-lo-fi-chill-wallpaper-twilight-sky-stars-sunset-beauty-in-nature-2d-vector-cartoon-landscape-illustration-vaporwave-background-80s-retro-album-art-synthwave-aesthetics.jpg');
+    background-size: cover;
+}
+.wrapper{
+    min-height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+.form-login{
+    max-width: 400px;
+    background: rgba(240, 140, 244, 0.8);
+    flex-grow: 1;
+    padding: 30px 30px 40px;
+    box-shadow: 0px 0px 17px 2px rgba(238, 183, 229, 0.119);
+}
+.heading{
+    text-align: center;
+    margin:0 0 30px 0;
+    font-family: "Gill Sans", sans-serif;
+    color: rgb(234, 71, 71);
+    font-weight:200px;
+}
+.input-gruop{
+    border-bottom: 1px solid #fff;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+}
+.input-item{
+    flex-grow: 1;
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: #fff;
+}
+.submit{
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    outline: none;
+    background-color: rgb(255, 20, 147);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.submit {
+  position: relative; 
+  transition: all 0.2s ease; 
+}
+
+.submit:hover {
+  background-color: rgb(255, 105, 180);
+  top: -2px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+#eye{
+    cursor: pointer;
+}
+#eye:hover{
+    color: #fff;
+}
