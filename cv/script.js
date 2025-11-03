@@ -74,31 +74,54 @@ function typeEffect() {
   setTimeout(typeEffect, isDeleting ? 60 : typingSpeed);
 }
 typeEffect();
+
 const audio = document.querySelector('#audio');
-const playlist = [
+const namea = document.querySelector('.song-title');
+
+const audiolist = [
   'audio/au1.mp3',
   'audio/au2.mp3',
-  'audio/au3.mp3'
+  'audio/au3.mp3',
 ];
-let index = 0;
-let started = false; 
+const nameaudio = [
+  'In Love',
+  'Anh Đã Ổn Hơn',
+  'Ghé Qua',
+];
 
-function playSong() {
-  audio.src = playlist[index];
+let id = 0;
+let star = true;
+function typeSongName(text) {
+  namea.textContent = "";
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      namea.textContent += text.charAt(i);
+      i++;
+      setTimeout(typing, 100); 
+    }
+  }
+  typing();
+}
+
+function playaudio() {
+  audio.src = audiolist[id];
+  typeSongName(nameaudio[id]); 
   audio.play();
 }
 
-audio.addEventListener('ended', () => {
-  index = (index + 1) % playlist.length;
-  playSong();
+audio.addEventListener('ended', function() {
+  id = (id + 1) % audiolist.length;
+  playaudio();
 });
 
-
-document.body.addEventListener('click', () => {
-  if (!started) {
-    started = true;
-    playSong();
+document.body.addEventListener('click', function() {
+  if (star) {
+    star = false;
+    playaudio();
   }
 });
-
-
+const nextsong = document.querySelector('#next-song');
+nextsong.addEventListener('click', function() {
+  audio.dispatchEvent(new Event('ended'));
+});
