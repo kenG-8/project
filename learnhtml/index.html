@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="box"></div>
-    <script src="scipt.js"></script>
+  <div class="card" data-img="beeper.png">
+  <img src="beeper.png" class="icon">
+</div>
+
+<div class="card" data-img="discord.png">
+  <img src="discord.png" class="icon">
+</div>
+
+<div class="card" data-img="spotify.png">
+  <img src="spotify.png" class="icon">
+</div>
+
+<svg>
+  <filter id="blurFilter">
+    <feGaussianBlur stdDeviation="15"></feGaussianBlur>
+  </filter>
+</svg>
+
+<div id="clone"></div>
+<script src="script.js"></script>
 </body>
 </html>
