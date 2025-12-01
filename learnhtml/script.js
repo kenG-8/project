@@ -1,23 +1,23 @@
-const clone = document.getElementById("clone");
+const articles = document.querySelectorAll('article');
 
-document.querySelectorAll(".card").forEach(card => {
-
-  card.addEventListener("mouseenter", e => {
-    const img = card.dataset.img;
-    clone.style.backgroundImage = `url(${img})`;
-    clone.style.backgroundSize = "contain";
-    clone.style.backgroundRepeat = "no-repeat";
-    clone.style.opacity = 1;
-    clone.style.transform = "translate(-50%, -50%) scale(1.3)";
+document.addEventListener('pointermove', (event) => {
+  articles.forEach((article) => {
+    const rect = article.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const x = (event.clientX - centerX) / (rect.width / 2);
+    const y = (event.clientY - centerY) / (rect.height / 2);
+    const px = Math.max(-1, Math.min(1, x));
+    const py = Math.max(-1, Math.min(1, y));
+    const container = article.querySelector('.img-container');
+    container.style.transform = `translate(${px*20}px, ${py*20}px)`;
   });
-
-  card.addEventListener("mousemove", e => {
-    clone.style.left = e.pageX + "px";
-    clone.style.top = e.pageY + "px";
-  });
-
-  card.addEventListener("mouseleave", () => {
-    clone.style.opacity = 0;
-  });
-
 });
+const fblink=getSelectionquerry("#fb");
+const iglink=getSelection('#ig');
+iglink.addEventListener('click',()=>{
+  window.location.href="https://www.instagram.com/trungg.24/";
+})
+fblink.addEventListener('click',()=>{
+  window.location.href="https://www.facebook.com/trung.gtat";
+})

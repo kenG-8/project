@@ -1,34 +1,65 @@
 body {
-  background: #000;
-  display: flex;
-  gap: 20px;
-  padding: 50px;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: #f0f0f0;
   font-family: sans-serif;
+  margin: 0;
 }
 
-.card {
-  width: 140px;
-  height: 140px;
-  background: #111;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 2rem;
+  width: 800px;
+  max-width: 95vw;
+}
+
+article {
   position: relative;
-  overflow: visible;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.12s ease;
 }
 
-.card .icon {
-  width: 70px;
+article:active {
+  transform: scale(0.98);
 }
 
-#clone {
+img {
+  width: 100px;
+  position: relative;
+  z-index: 2;
+}
+
+.img-container {
   position: absolute;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  width: 90px;
-  height: 90px;
-  opacity: 0;
-  transition: 0.15s;
-  filter: url(#blurFilter) brightness(2);
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  transform: translate(0,0);
+  filter: url(#blur) saturate(5) brightness(1.3);
+  transition: transform 0.1s ease;
+}
+
+h2 {
+  position: relative;
+  z-index: 3;
+  margin: 0.5rem 0 0 0;
+  font-size: 1rem;
+}
+#locket{
+  text-decoration: none;
+}
+a#locket img {
+    width: 20px !important;
+    height: 20px !important;
 }

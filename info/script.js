@@ -11,10 +11,10 @@ const coverImg = document.getElementById("coverImg");
 const loveMessage = document.getElementById("loveMessage");
 
 const playlist = [
-    { title:"In Love", artist:"LowG", src:"assest/audio/au1.mp3", cover:"https://i.scdn.co/image/ab67616d0000b2730e4f73e2d29e3c6f4320f3fa"},
-    { title:"Anh đã ôn hơn", artist:"MCK", src:"assest/audio/au2.mp3", cover:"https://i.scdn.co/image/ab67616d0000b273f5505e7e39be33f679e7f828"},
-    { title:"Ghé qua", artist:"Rainy Day", src:"assest/audio/au3.mp3", cover:"https://i.scdn.co/image/ab67616d0000b2738222d4f29a007f309a47d25e"},
-    { title:"Tay to", artist:"MCK", src:"assest/audio/au4.mp3", cover:"https://i.scdn.co/image/ab67616d0000b273418c3ec4765d75806c596395"}
+    { title:"In Love", artist:"LowG", src:"assest/audio/au1.mp3", cover:"assest/inlove.png"},
+    { title:"Anh đã ôn hơn", artist:"MCK", src:"assest/audio/au2.mp3", cover:"assest/adoh.png"},
+    { title:"Ghé qua", artist:"Rainy Day", src:"assest/audio/au3.mp3", cover:"assest/ghequa.png"},
+    { title:"Tay to", artist:"MCK", src:"assest/audio/au4.mp3", cover:"assest/tayto.png"}
 ];
 
 let currentSongIndex=0, isPlaying=false, audioCtx, analyzer, source, barCount=40;
@@ -85,4 +85,72 @@ document.addEventListener('DOMContentLoaded',()=>{
         loveMessage.classList.add('show'); 
         loveMessage.addEventListener('animationend',handleLoveMessageAnimationEnd,{once:true}); 
     },1000);
+});
+const articles = document.querySelectorAll('article');
+  document.addEventListener('pointermove', (event) => {
+    articles.forEach(article => {
+      const rect = article.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const x = (event.clientX - centerX) / (rect.width / 2);
+      const y = (event.clientY - centerY) / (rect.height / 2);
+      article.style.setProperty('--pointer-x', x.toFixed(3));
+      article.style.setProperty('--pointer-y', y.toFixed(3));
+    });
+  });
+  const skills = [
+  { name: "C++", img: "img/a1.png" },
+  { name: "Python", img: "img/a2.png" },
+  { name: "C#", img: "img/a3.png" },
+  { name: "Unity", img: "img/a4.png" },
+  { name: "JavaScript", img: "img/a5.png" },
+  { name: "HTML", img: "img/a6.png" }
+];
+const imgElement = document.getElementById("gallery-img");
+const dynamicText = document.querySelector(".dynamic-text");
+
+let skillIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingSpeed = 100;
+const delayBetweenSkills = 3000; 
+
+function typeEffect() {
+  const currentSkill = skills[skillIndex].name;
+
+  if (!isDeleting) {
+    dynamicText.textContent = currentSkill.slice(0, ++charIndex);
+    if (charIndex === currentSkill.length) {
+      setTimeout(() => isDeleting = true, delayBetweenSkills - 1000);
+    }
+  } else {
+    dynamicText.textContent = currentSkill.slice(0, --charIndex);
+    if (charIndex === 0) {
+      isDeleting = false;
+      skillIndex = (skillIndex + 1) % skills.length;
+      imgElement.src = skills[skillIndex].img; 
+    }
+  }
+  setTimeout(typeEffect, isDeleting ? 60 : typingSpeed);
+}
+typeEffect();
+const fblink = document.querySelector('#fb');
+const iglink = document.querySelector('#ig');
+const ttlink = document.querySelector('#tiktok');
+const githublink = document.querySelector('#github');
+
+fblink.addEventListener('click', () => {
+    window.open("https://www.facebook.com/trung.gtat", '_blank');
+});
+
+iglink.addEventListener('click', () => {
+    window.open("https://www.instagram.com/trungg.24/", '_blank');
+});
+
+githublink.addEventListener('click', () => {
+    window.open("https://github.com/kenG-8", '_blank');
+});
+
+ttlink.addEventListener('click', () => {
+    window.open("https://www.tiktok.com/@trungg2737", '_blank');
 });

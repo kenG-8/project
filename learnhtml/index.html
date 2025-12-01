@@ -3,29 +3,201 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Card Hover Effect 4 Items</title>
+  <style>
+    @import url('https://unpkg.com/normalize.css');
+
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      background: #fefefe;
+      font-family: Arial, sans-serif;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 cột */
+      gap: 0.5rem 1rem; /* 0.5rem giữa hàng, 1rem giữa cột */
+      justify-items: center;
+      padding: 1rem;
+      width: 650px;
+      max-width: 95vw;
+    }
+
+    article {
+      width: 280px;
+      aspect-ratio: 4/3;
+      position: relative;
+      border-radius: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.12s cubic-bezier(.645,.045,.355,1);
+      border: 2px solid #ccc; /* border cho từng card */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+
+    article:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    article > div {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      gap: 0.5rem;
+    }
+
+    article img:nth-of-type(1) {
+      width: 100px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .img-container {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      transform: translateZ(0);
+      filter: url(#blur) saturate(var(--icon-saturate,6)) brightness(var(--icon-brightness,1.5)) contrast(var(--icon-contrast,1.5));
+      translate: calc(var(--pointer-x, -10) * 50cqi) calc(var(--pointer-y, -10) * 50cqh);
+      scale: var(--icon-scale,4);
+      opacity: var(--icon-opacity,0.25);
+      will-change: transform, filter;
+    }
+
+    h2 {
+      position: relative;
+      z-index: 4;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    button {
+      position: absolute;
+      top: .5rem;
+      right: .5rem;
+      width: 32px;
+      aspect-ratio: 1;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      display: grid;
+      place-items: center;
+      opacity: 0.3;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    button:hover, button:focus {
+      opacity: 1;
+    }
+
+    button svg {
+      width: 20px;
+      fill: currentColor;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 </head>
 <body>
-  <div class="card" data-img="beeper.png">
-  <img src="beeper.png" class="icon">
-</div>
 
-<div class="card" data-img="discord.png">
-  <img src="discord.png" class="icon">
-</div>
+<main>
+  <article>
+    <div>
+      <button aria-label="More options">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"/>
+        </svg>
+      </button>
+      <div class="img-container">
+        <img src="https://assets.codepen.io/605876/beeper.png" alt="Beeper">
+      </div>
+      <img src="https://assets.codepen.io/605876/beeper.png" alt="Beeper">
+      <h2>Beeper</h2>
+    </div>
+  </article>
 
-<div class="card" data-img="spotify.png">
-  <img src="spotify.png" class="icon">
-</div>
+  <article>
+    <div>
+      <button aria-label="More options">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"/>
+        </svg>
+      </button>
+      <div class="img-container">
+        <img src="https://assets.codepen.io/605876/discord.png" alt="Discord">
+      </div>
+      <img src="https://assets.codepen.io/605876/discord.png" alt="Discord">
+      <h2>Discord</h2>
+    </div>
+  </article>
 
-<svg>
-  <filter id="blurFilter">
-    <feGaussianBlur stdDeviation="15"></feGaussianBlur>
+  <article>
+    <div>
+      <button aria-label="More options">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"/>
+        </svg>
+      </button>
+      <div class="img-container">
+        <img src="https://assets.codepen.io/605876/spotify.png" alt="Spotify">
+      </div>
+      <img src="https://assets.codepen.io/605876/spotify.png" alt="Spotify">
+      <h2>Spotify</h2>
+    </div>
+  </article>
+
+  <article>
+    <div>
+      <button aria-label="More options">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"/>
+        </svg>
+      </button>
+      <div class="img-container">
+        <img src="https://assets.codepen.io/605876/photos.png" alt="Photos">
+      </div>
+      <img src="https://assets.codepen.io/605876/photos.png" alt="Photos">
+      <h2>Photos</h2>
+    </div>
+  </article>
+</main>
+
+<svg class="sr-only">
+  <filter id="blur" width="500%" height="500%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="25" />
   </filter>
 </svg>
 
-<div id="clone"></div>
-<script src="script.js"></script>
+<script>
+  const articles = document.querySelectorAll('article');
+  document.addEventListener('pointermove', (event) => {
+    articles.forEach(article => {
+      const rect = article.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const x = (event.clientX - centerX) / (rect.width / 2);
+      const y = (event.clientY - centerY) / (rect.height / 2);
+      article.style.setProperty('--pointer-x', x.toFixed(3));
+      article.style.setProperty('--pointer-y', y.toFixed(3));
+    });
+  });
+</script>
+
 </body>
 </html>
