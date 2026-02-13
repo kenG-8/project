@@ -1,3 +1,6 @@
+/* ==========================================
+   PART 1: MATRIX RAIN EFFECT
+   ========================================== */
 const canvas = document.getElementById('heartRain');
 const ctx = canvas.getContext('2d');
 
@@ -63,6 +66,9 @@ function drawMatrix() {
 
 drawMatrix();
 
+/* ==========================================
+   PART 2: INTERACTIVE PARTICLE HEART
+   ========================================== */
 const overlayCanvas = document.getElementById('heartOverlay');
 const oCtx = overlayCanvas.getContext('2d');
 
@@ -71,6 +77,7 @@ let oWidth, oHeight;
 let particles = [];
 let noteIndex = 0;
 let isHeart = true;
+let autoPlayInterval = null;
 
 function resizeOverlay() {
     oWidth = window.innerWidth;
@@ -88,7 +95,7 @@ function resizeOverlay() {
 resizeOverlay();
 
 const listnote = [
-    "Chúc bạn Valentine vui vẻ",
+    "Chúc cậu Valentine vui vẻ",
     "Mãi luôn xinh đẹp nhé",
     "Cậu luôn là bông hoa đẹp nhất trên đời",
     "Chúc cậu luôn hạnh phúc",
@@ -103,7 +110,7 @@ class Particle {
         this.targetY = y;
         this.size = 4;
         this.color = '#ffffff';
-        this.speed = 0.05;
+        this.speed = 0.12;
     }
 
     update() {
@@ -116,7 +123,7 @@ class Particle {
 
     draw() {
         oCtx.fillStyle = this.color;
-        oCtx.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+        oCtx.fillRect(this.x - this.size/2, this.y - this.size/2, this.size, this.size);
     }
 }
 
@@ -131,7 +138,7 @@ function getHeartPoints() {
 
     const k = Math.min(oWidth, oHeight) / 45;
     const cx = oWidth / 2;
-    const cy = oHeight / 2 - oHeight * 0.05;
+    const cy = oHeight / 2;
 
     for (let t = 0; t <= Math.PI * 2; t += 0.01) {
         const x = 16 * Math.pow(Math.sin(t), 3);
@@ -164,14 +171,14 @@ function getTextPoints(text) {
     const words = text.split(' ');
     const lineHeight = fontSize * 1.2;
     const maxWidth = oWidth * 0.85;
-
+    
     let lines = [];
     let currentLine = '';
-
+    
     words.forEach(word => {
         const testLine = currentLine + (currentLine ? ' ' : '') + word;
         const metrics = vCtx.measureText(testLine);
-
+        
         if (metrics.width > maxWidth && currentLine !== '') {
             lines.push(currentLine);
             currentLine = word;
@@ -182,7 +189,7 @@ function getTextPoints(text) {
     lines.push(currentLine);
 
     const startY = oHeight / 2 - ((lines.length - 1) * lineHeight) / 2;
-
+    
     lines.forEach((line, i) => {
         vCtx.fillText(line, oWidth / 2, startY + i * lineHeight);
     });
@@ -203,7 +210,7 @@ function samplePointsFromCanvas(canvas, gap) {
             }
         }
     }
-
+    
     return points;
 }
 
@@ -233,16 +240,12 @@ function toHeart() {
     isHeart = true;
     const points = getHeartPoints();
     updateParticles(points);
-    const hint = document.getElementById('clickHint');
-    if (hint) hint.style.opacity = 1;
 }
 
 function toCurrentNote() {
     const text = listnote[noteIndex];
     const points = getTextPoints(text);
     updateParticles(points);
-    const hint = document.getElementById('clickHint');
-    if (hint) hint.style.opacity = 0;
 }
 
 function toNextNote() {
@@ -250,8 +253,6 @@ function toNextNote() {
     const text = listnote[noteIndex];
     const points = getTextPoints(text);
     updateParticles(points);
-    const hint = document.getElementById('clickHint');
-    if (hint) hint.style.opacity = 0;
     noteIndex = (noteIndex + 1) % listnote.length;
 }
 
@@ -266,34 +267,54 @@ function animateOverlay() {
     requestAnimationFrame(animateOverlay);
 }
 
-overlayCanvas.addEventListener('click', () => {
-    if (isHeart) {
-        noteIndex = 0;
-        toNextNote();
-    } else {
+function startAutoPlay() {
+    if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+    }
+    
+    noteIndex = 0;
+    isHeart = false;
+    toNextNote();
+    
+    autoPlayInterval = setInterval(() => {
         if (noteIndex >= listnote.length) {
-            noteIndex = 0;
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
+            isHeart = true;
             toHeart();
         } else {
             toNextNote();
         }
+    }, 3000);
+}
+
+// DOM Elements
+const noteElement = document.getElementById('note');
+const clickHintElement = document.getElementById('clickHint');
+
+// Initial state
+noteElement.style.display = 'none';
+clickHintElement.style.display = 'block';
+
+// Click handler
+overlayCanvas.addEventListener('click', () => {
+    if (isHeart) {
+        noteElement.style.display = 'block';
+        clickHintElement.style.display = 'none';
+        startAutoPlay();
     }
 });
 
+// Touch handler
 overlayCanvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
     if (isHeart) {
-        noteIndex = 0;
-        toNextNote();
-    } else {
-        if (noteIndex >= listnote.length) {
-            noteIndex = 0;
-            toHeart();
-        } else {
-            toNextNote();
-        }
+        noteElement.style.display = 'block';
+        clickHintElement.style.display = 'none';
+        startAutoPlay();
     }
 });
 
+// Initialize
 toHeart();
 animateOverlay();
