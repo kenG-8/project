@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chúc mừng 20/10 💖</title>
+<style>
+  :root{
+    --bg1: #fff6fb;
+    --bg2: #ffd9e6;
+  }
+  html,body{
+    height:100%;
+    margin:0;
+    background: radial-gradient(circle at center, var(--bg1), var(--bg2));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    font-family: Inter, system-ui, sans-serif;
+    perspective:1200px;
+  }
+
+  .stage {
+    width: 760px;
+    height: 520px;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  .carousel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%,-50%);
+    transform-style: preserve-3d;
+  }
+
+  .carousel img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    margin: -60px 0 0 -60px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    transition: transform 300ms cubic-bezier(.2,.9,.2,1), filter 300ms, opacity 300ms;
+    opacity: 0.95;
+    backface-visibility: hidden;
+  }
+
+  .carousel img.front {
+    transform: scale(1.4) !important;
+    filter: saturate(1.05) drop-shadow(0 20px 40px rgba(0,0,0,0.35));
+    z-index: 9999;
+    opacity: 1;
+  }
+
+  /* 🌸 Dòng chữ chúc mừng - Đặt phía trên cùng */
+  .message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #e91e63;
+    font-family: "Great Vibes", cursive;
+    font-size: 38px;
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(255, 105, 180, 0.6), 0 0 30px rgba(255,182,193,0.4);
+    animation: float 4s ease-in-out infinite alternate;
+    z-index: 999999;
+    pointer-events: none;
+  }
+
+  .message span {
+    display: block;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    color: #d81b60;
+    margin-top: 6px;
+    opacity: 0.9;
+  }
+
+  @keyframes float {
+    0% { transform: translateX(-50%) translateY(0); }
+    100% { transform: translateX(-50%) translateY(5px); }
+  }
+
+  /* 🌸 Hoa rơi */
+  .petal {
+    position: fixed;
+    font-size: 20px;
+    animation: fall linear infinite;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 100000;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+  <!-- 🌸 Dòng chữ chúc mừng nằm ở phía trên -->
+  <div class="message">
+    🌸 Chúc mừng ngày 20/10 💐  
+    <span>Chúc bạn luôn xinh đẹp, hạnh phúc & tỏa sáng như những bông hoa!</span>
+  </div>
+
+  <div class="stage">
+    <div class="carousel" id="carousel"></div>
+  </div>
+
+<script>
+/* ----------- HIỆU ỨNG ẢNH QUAY ------------- */
+const COUNT = 21;
+const radius = 260;
+const spinSpeed = 0.008;
+const carousel = document.getElementById('carousel');
+const items = [];
+
+for(let i=0;i<COUNT;i++){
+  const im = document.createElement('img');
+  im.src = `anh(${i+1}).jpg`;
+  carousel.appendChild(im);
+  items.push(im);
+}
+
+const baseAngles = items.map((_, i) => (i / COUNT) * Math.PI * 2);
+let angle = 0;
+
+function render(){
+  angle += spinSpeed;
+  let frontIndex = 0, maxZ = -Infinity;
+
+  for(let i=0;i<COUNT;i++){
+    const el = items[i];
+    const theta = baseAngles[i] + angle;
+    const x = Math.cos(theta) * radius;
+    const z = Math.sin(theta) * radius;
+    const deg = theta * 180 / Math.PI;
+    el.style.transform = `translate3d(${x}px,0,${z}px) rotate(${-deg}deg)`;
+    if(z > maxZ){ maxZ = z; frontIndex = i; }
+    el.style.zIndex = Math.round(z + 2000);
+  }
+
+  items.forEach((el, idx) => {
+    el.classList.toggle('front', idx === frontIndex);
+  });
+
+  requestAnimationFrame(render);
+}
+render();
+
+/* ----------- HOA RƠI ----------- */
+const icons = ['🌸','🌷','🌺','💮','💐','🌹'];
+for (let i = 0; i < 25; i++) {
+  const petal = document.createElement('div');
+  petal.className = 'petal';
+  petal.textContent = icons[Math.floor(Math.random() * icons.length)];
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.animationDuration = 5 + Math.random() * 5 + 's';
+  petal.style.fontSize = 18 + Math.random() * 18 + 'px';
+  document.body.appendChild(petal);
+}
+</script>
+</body>
+</html>

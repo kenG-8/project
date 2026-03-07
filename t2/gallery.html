@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thư chúc 20/10</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Mali', cursive;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffdee9 0%, #b5fffc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #d63384;
+      text-shadow: 1px 1px 3px #fff;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .letter {
+      width: 120px;
+      height: 80px;
+      background: #fff;
+      border: 2px solid #d63384;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.4s, opacity 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #d63384;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .letter:hover {
+      transform: scale(1.1);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .popup {
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      animation: zoomIn 0.5s ease forwards;
+      position: relative;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .popup p {
+      font-size: 16px;
+      color: #d63384;
+      font-weight: 600;
+    }
+
+    /* Hoa rơi */
+    .flower {
+      position: fixed;
+      top: -10px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/4150/4150897.png');
+      background-size: cover;
+      width: 20px;
+      height: 20px;
+      animation: fall linear forwards;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💌 Chúc mừng 20/10 💖</h1>
+  <div class="container">
+    <div class="letter" onclick="openLetter(0)">💌</div>
+    <div class="letter" onclick="openLetter(1)">💌</div>
+    <div class="letter" onclick="openLetter(2)">💌</div>
+    <div class="letter" onclick="openLetter(3)">💌</div>
+    <div class="letter" onclick="openLetter(4)">💌</div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closePopup()">
+    <div class="popup" id="popup" onclick="event.stopPropagation()">
+      <img id="popupImg" src="" alt="">
+      <p id="popupText"></p>
+    </div>
+  </div>
+
+  <audio id="bgMusic" src="./assets/a.mp3" autoplay loop></audio>
+
+  <script>
+    const messages = [
+      "Chúc ngày 20/10 ngập tràn niềm vui 🌸",
+      "Chúc mọi ước mơ của bạn đều thành sự thật 🌷",
+      "Bạn là đóa hoa đẹp nhất giữa đời này 💐",
+      "Chúc bạn luôn xinh đẹp, vui tươi và hạnh phúc 💖",
+      "Cảm ơn vì đã luôn rạng rỡ như ánh nắng 💞"
+    ];
+
+    const images = [
+      "anh(4).jpg",
+      "anh(5).jpg",
+      "anh(6).jpg",
+      "anh(8).jpg",
+      "anh(14).jpg"
+    ];
+
+    function openLetter(index) {
+      document.getElementById("popupImg").src = images[index];
+      document.getElementById("popupText").innerText = messages[index];
+      document.getElementById("overlay").style.display = "flex";
+
+      document.querySelectorAll(".letter").forEach(l => {
+        l.style.opacity = "0.3";
+        l.style.transform = "scale(0.9)";
+      });
+    }
+
+    function closePopup() {
+      document.getElementById("overlay").style.display = "none";
+      document.querySelectorAll(".letter").forEach(l => {
+        l.style.opacity = "1";
+        l.style.transform = "scale(1)";
+      });
+    }
+
+    // Hiệu ứng hoa rơi
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.style.left = Math.random() * 100 + "vw";
+      flower.style.animationDuration = 4 + Math.random() * 5 + "s";
+      flower.style.width = flower.style.height = 15 + Math.random() * 15 + "px";
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 9000);
+    }
+    setInterval(createFlower, 300);
+  </script>
+
+</body>
+</html>

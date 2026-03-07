@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💌 Món Quà Bất Ngờ 20/10 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    background: #fcf4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===== HOA RƠI ===== */
+.falling-petal {
+    position: absolute;
+    top: -20px;
+    width: 12px;
+    height: 12px;
+    background: rgba(255,192,203,0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: 0 0 5px rgba(255,192,203,0.5);
+    animation: fall linear;
+}
+@keyframes fall {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity:1; }
+    20% { transform: translateY(20vh) translateX(-20px) rotate(-10deg); }
+    40% { transform: translateY(40vh) translateX(15px) rotate(8deg); }
+    60% { transform: translateY(60vh) translateX(-15px) rotate(-6deg); }
+    80% { transform: translateY(80vh) translateX(10px) rotate(4deg); }
+    100% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity:0.3; }
+}
+
+/* ===== BỨC THƯ ===== */
+.envelope-wrapper {
+    position: relative;
+    width: 250px; height: 180px; cursor: pointer; z-index: 10;
+}
+.envelope-lid {
+    position: absolute; top:0; left:0; width:100%; height:50%;
+    background: #f48fb1; border-top-left-radius:10px; border-top-right-radius:10px;
+    transform-origin: top center; transition: transform 1s ease-in-out;
+    display: flex; justify-content: center; align-items: center; z-index:5;
+}
+.envelope-lid::after { content:"❤️"; font-size:2em; }
+.envelope-wrapper.open .envelope-lid { transform: rotateX(180deg); }
+
+.envelope-body {
+    position: absolute; bottom:0; left:0; width:100%; height:50%;
+    background: #f8bbd0; border-bottom-left-radius:10px; border-bottom-right-radius:10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index:4;
+}
+
+/* NỘI DUNG */
+.content {
+    position: absolute; top:0; left:0; width:100%; height:100%; padding:25px;
+    box-sizing: border-box; background:#fff; border-radius:10px;
+    transform: translateY(100%) scale(0.8); opacity:0;
+    transition: transform 1s cubic-bezier(0.68,-0.55,0.265,1.55), opacity 0.8s;
+    z-index:100; text-align:center; overflow-y:auto; pointer-events:none;
+}
+.envelope-wrapper.open .content {
+    opacity:1; width:800px; max-width:95vw; max-height:90vh;
+    left:50%; top:50%; transform:translate(-50%,-50%) scale(1); position:fixed;
+    padding:40px; box-shadow:0 20px 50px rgba(0,0,0,0.4);
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+    pointer-events:auto;
+}
+
+.content img { max-width:95%; max-height:35vh; margin:10px 0 30px; border-radius:15px; border:3px solid #f48fb1; }
+.content h3 { font-family:'Dancing Script', cursive; font-size:2.5em; color:#d81b60; margin:10px 0; }
+.content p { font-family:'Playfair Display', serif; font-size:1.2em; color:#880e4f; line-height:1.6; font-style:italic; }
+.signature { font-family:'Dancing Script', cursive; font-size:1.5em; color:#ad1457; margin-top:20px; }
+
+.close-btn { position:absolute; top:15px; right:20px; font-size:35px; color:#b71c1c; cursor:pointer; display:none; z-index:110; }
+.envelope-wrapper.open .close-btn { display:block; }
+</style>
+</head>
+<body>
+
+<audio id="bg-music" loop>
+    <source src="a.mp3" type="audio/mpeg">
+</audio>
+
+<div class="envelope-wrapper" id="envelope-wrapper">
+    <div class="envelope-lid"></div>
+    <div class="envelope-body"></div>
+
+        <div class="content" id="envelope-content">
+        <span class="close-btn" onclick="closeEnvelope(event)">&times;</span>
+        <img src="anh.jpg" alt="Hình ảnh Chúc Mừng 20/10">
+        <h3>💌 Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10 💌</h3>
+        <p>
+            Gửi đến người phụ nữ tuyệt vời nhất,<br>
+            Chúc bạn luôn ngập tràn niềm vui, sức khỏe dồi dào và mãi mãi là bông hoa xinh đẹp nhất trong lòng mọi người.
+            <br><br>
+            Mọi điều tốt đẹp nhất sẽ đến với bạn!
+        </p>
+        <div class="signature">
+            Trân trọng từ Người Gửi Yêu Thương
+        </div>
+    </div>
+</div>
+
+<script>
+const envelope = document.getElementById('envelope-wrapper');
+const music = document.getElementById('bg-music');
+const body = document.body;
+
+// MỞ THƯ
+function openEnvelope() {
+    envelope.classList.add('open');
+    envelope.style.cursor = 'default';
+    music.play().catch(()=>console.warn("Không thể phát nhạc tự động."));
+}
+function closeEnvelope(e) {
+    e.stopPropagation();
+    envelope.classList.remove('open');
+    envelope.style.cursor = 'pointer';
+    music.pause();
+    music.currentTime = 0;
+}
+
+// ===== HOA RƠI =====
+function createPetal() {
+    const petal = document.createElement('div');
+    petal.className = 'falling-petal';
+    petal.style.left = Math.random()*window.innerWidth + 'px';
+    const size = 8 + Math.random()*12;
+    petal.style.width = size+'px';
+    petal.style.height = size+'px';
+    petal.style.animationDuration = (6 + Math.random()*6) + 's';
+    petal.style.animationDelay = Math.random()*2 + 's';
+    body.appendChild(petal);
+    setTimeout(()=>petal.remove(), (6+6+2)*1000); // xóa sau khi rơi hết
+}
+
+// Tạo nhiều cánh hoa liên tục
+for(let i=0;i<40;i++) createPetal();
+setInterval(createPetal, 500);
+
+envelope.addEventListener('click', openEnvelope);
+</script>
+
+</body>
+</html>
