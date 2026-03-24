@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="assest/style.css">
+   <title>Bài Báo Cáo - Công nghệ thông tin và giáo dục</title>
+</head>
+<body>
+   <!-- Tổng thể Layout -->
+   <div class="app-layout">
+      <!-- Thanh điều hướng bên trái (Sidebar / Thanh Bar) -->
+      <nav class="sidebar">
+         <div class="sidebar-header">
+            <h2><i class="fa-solid fa-graduation-cap"></i> Menu</h2>
+         </div>
+         <div class="sidebar-menu">
+            <div class="nav-item active" data-target="panel-home">
+               <i class="fa-solid fa-house"></i> Home
+            </div>
+            <div class="nav-item" data-target="panel-members">
+               <i class="fa-solid fa-users"></i> Thành viên
+            </div>
+            <div class="nav-item" data-target="panel-khaiquat">
+               <i class="fa-solid fa-laptop-code"></i> Khái quát
+            </div>
+            <div class="nav-item" data-target="panel-thachthuc">
+               <i class="fa-solid fa-triangle-exclamation"></i> Thách thức
+            </div>
+            <div class="nav-item" data-target="panel-cohoi">
+               <i class="fa-solid fa-lightbulb"></i> Cơ hội
+            </div>
+            <div class="nav-item" data-target="panel-ketluan">
+               <i class="fa-solid fa-flag-checkered"></i> Kết luận
+            </div>
+         </div>
+         <div class="audio-player" id="audioPlayer">
+            <div class="audio-top">
+               <div class="audio-cover"><img id="coverImg" src="assest/img/au1.jfif" alt="Cover"></div>
+               <div class="audio-info">
+                  <div class="audio-title" id="songTitle"></div>
+                  <div class="audio-artist" id="artistName"></div>
+               </div>
+               <button class="playlist-btn" id="playlistBtn" title="Danh sách phát"><i class="fa-solid fa-list-ul"></i></button>
+            </div>
+
+            <div class="audio-playlist" id="audioPlaylist"></div>
+
+            <div class="audio-controls">
+               <button id="prevBtn"><i class="fa-solid fa-backward-step"></i></button>
+               <button id="togglePlayBtn"><i class="fa-solid fa-play"></i></button>
+               <button id="nextBtn"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+
+            <div class="audio-barbox" id="bars"></div>
+
+            <div class="audio-timer">
+               <span id="current">0:00</span>
+               <span id="duration">0:00</span>
+            </div>
+
+            <audio id="audio" src=""></audio>
+         </div>
+      </nav>
+
+      <!-- Vùng hiển thị nội dung chính (Phần Home) -->
+      <main class="main-content">
+         
+         <!-- Panel 0: Home (Welcome) -->
+         <section class="content-panel active" id="panel-home">
+            <div class="hero-section">
+               <div class="hero-overlay"></div>
+               <div class="hero-content">
+                  <h1>BÀI BÁO CÁO</h1>
+                  <p>Công Nghệ Thông Tin Tác Động & Chuyển Đổi Giáo Dục Hiện Đại</p>
+                  <button class="explore-btn" onclick="document.querySelector('[data-target=\'panel-khaiquat\']').click()">Khám phá ngay <i class="fa-solid fa-arrow-right"></i></button>
+               </div>
+            </div>
+         </section>
+
+         <!-- Panel 1: Thành viên -->
+         <section class="content-panel" id="panel-members">
+            <div class="panel-header">
+               <h1>Thành viên nhóm</h1>
+               <p>Danh sách các thành viên tham gia</p>
+            </div>
+            <div class="panel-body">
+               <div class="member">
+                  <div class="member-item">
+                     <img src="assest/img/bao.png" alt="">
+                     <div class="member-item-info"><p>Lê Bảo</p><p>member</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/hai.jpg" alt="">
+                     <div class="member-item-info"><p>Phan Hải</p><p>member</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/hoan.png" alt="">
+                     <div class="member-item-info"><p>Công Hoàn</p><p>member</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/lai.jpg" alt="">
+                     <div class="member-item-info"><p>Như Lai</p><p>member</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/linh.jpg" alt="">
+                     <div class="member-item-info"><p>Hoàng linh</p><p>captain</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/minh.png" alt="">
+                     <div class="member-item-info"><p>Văn Minh</p><p>member</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/sao.png" alt="">
+                     <div class="member-item-info"><p>Đức Sao</p><p>designer</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/thao.jpg" alt="">
+                     <div class="member-item-info"><p>Thị Thảo</p><p>member</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/thaodang.jpg" alt="">
+                     <div class="member-item-info"><p>Thảo Đăng</p><p>member</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/thinh.jpg" alt="">
+                     <div class="member-item-info"><p>Thịnh</p><p>member</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/trung.jpg" alt="">
+                     <div class="member-item-info"><p>TrungG</p><p>Dev</p></div>
+                  </div>
+                  <div class="member-item">
+                     <img src="assest/img/yen.jpg" alt="">
+                     <div class="member-item-info"><p>Yên</p><p>member</p></div>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+         <!-- Panel 2: Khái quát -->
+         <section class="content-panel" id="panel-khaiquat">
+            <div class="panel-header">
+               <h1>Công nghệ thông tin và giáo dục</h1>
+               <p>Định nghĩa và vai trò</p>
+            </div>
+            <div class="panel-body">
+               <div class="content-section">
+                  <h3>Khái niệm công nghệ thông tin</h3>
+                  <p>Công nghệ thông tin (CNTT - Information Technology) là ngành sử dụng máy tính, phần mềm và mạng internet để lưu trữ, xử lý, truyền tải và bảo mật dữ liệu. Lĩnh vực này bao gồm kỹ thuật phần mềm, khoa học máy tính, an ninh mạng và quản trị hệ thống, ứng dụng rộng rãi trong kinh tế, giáo dục, và đời sống.</p>
+               </div>
+               <div class="content-section">
+                  <h3>Công nghệ thông tin trong giáo dục</h3> 
+                  <p>Công nghệ thông tin (CNTT) đang cách mạng hóa giáo dục bằng cách cung cấp các công cụ học tập linh hoạt, cá nhân hóa và tương tác. Từ hệ thống quản lý học tập (LMS), lớp học trực tuyến, đến trí tuệ nhân tạo (AI) hỗ trợ giảng dạy, CNTT giúp mở rộng khả năng tiếp cận kiến thức, nâng cao hiệu quả giảng dạy và chuẩn bị cho học sinh những kỹ năng cần thiết trong kỷ nguyên số.</p>
+               </div>
+               <div class="content-section">
+                  <h3>Vai trò của công nghệ thông tin trong giáo dục</h3>
+                  <p>Công nghệ thông tin (CNTT) đóng vai trò quan trọng trong giáo dục hiện đại, giúp nâng cao chất lượng giảng dạy và học tập. Các công cụ như hệ thống quản lý học tập (LMS), tài nguyên giáo dục mở (OER), và các nền tảng học trực tuyến giúp học sinh tiếp cận kiến thức mọi lúc, mọi nơi. Ngoài ra, CNTT còn hỗ trợ cá nhân hóa lộ trình học tập, đánh giá hiệu quả và tạo môi trường học tập tương tác, sáng tạo.</p>
+               </div>
+            </div>
+         </section>
+
+         <!-- Panel 3: Thách thức -->
+         <section class="content-panel" id="panel-thachthuc">
+            <div class="panel-header">
+               <h1>Thách thức</h1>
+               <p>Những khó khăn và trở ngại nhóm cần giải quyết</p>
+            </div>
+            <div class="panel-body">
+               <div class="content-section">
+                  <h3>Tổng quát</h3>
+                  <p>Nhân lực công nghệ thông tin (CNTT) trong giáo dục đối mặt với nhiều thách thức lớn: thiếu hụt nhân sự chất lượng cao, kỹ năng số của giáo viên hạn chế, hạ tầng công nghệ chưa đồng bộ và chi phí đầu tư cao. Sự thay đổi nhanh chóng của công nghệ (AI, EdTech) tạo áp lực cập nhật kiến thức liên tục, bên cạnh các vấn đề về bảo mật dữ liệu và đạo đức AI.</p>
+               </div>
+               <div class="content-section">
+                  <h3>Chi tiết</h3>
+                  <ul>
+                     <li><strong>Thiếu hụt nhân lực chất lượng cao:</strong> Thiếu các chuyên gia CNTT vừa am hiểu công nghệ, vừa am hiểu môi trường giáo dục để phát triển các phần mềm, nền tảng giảng dạy chuyên biệt.</li>
+                     <li><strong>Kỹ năng số của giáo viên yếu:</strong> Nhiều giáo viên gặp khó khăn khi chuyển đổi từ phương pháp truyền thống sang sử dụng công cụ số, AI, hoặc thiết bị hiện đại trong giảng dạy, đòi hỏi thời gian đào tạo lại lớn.</li>
+                     <li><strong>Hạ tầng và trang thiết bị hạn chế:</strong> Đặc biệt tại các khu vực khó khăn, thiếu internet tốc độ cao và thiết bị (máy tính, bảng tương tác), gây ra khoảng cách số trong giáo dục.</li>
+                     <li><strong>Áp lực cập nhật công nghệ nhanh:</strong> Sự phát triển thần tốc của trí tuệ nhân tạo (AI) yêu cầu đội ngũ nhân lực phải liên tục cập nhật, nếu không sẽ bị tụt hậu.</li>
+                     <li><strong>An toàn và bảo mật dữ liệu:</strong> Quản lý dữ liệu học sinh, sinh viên và bảo mật hệ thống mạng trong trường học là thách thức lớn, đối mặt với nguy cơ gian lận và đánh cắp thông tin.</li>
+                     <li><strong>Tâm lý ngại thay đổi:</strong> Một số bộ phận trong ngành giáo dục chưa sẵn sàng chấp nhận sự chuyển đổi số.</li>      
+                  </ul>
+               </div>
+            </div>
+         </section>
+
+         <!-- Panel 4: Cơ hội -->
+         <section class="content-panel" id="panel-cohoi">
+            <div class="panel-header">
+               <h1>Cơ hội</h1>
+               <p>Tiềm năng và định hướng trong tương lai</p>
+            </div>
+            <div class="panel-body">
+               <div class="content-section">
+                  <h3>Tổng quát</h3>
+                  <p>Nhân lực CNTT trong lĩnh vực giáo dục đang đối mặt với cơ hội to lớn từ xu hướng chuyển đổi số, EdTech (công nghệ giáo dục), và cá nhân hóa học tập. Cơ hội nghề nghiệp rộng mở bao gồm phát triển phần mềm quản lý trường học, thiết kế nền tảng học trực tuyến, ứng dụng AI, VR/AR, và bảo mật dữ liệu giáo dục.</p>
+               </div>
+               <div class="content-section">
+                  <h3>Chi tiết</h3>
+                  <ul>
+                     <li><strong>Phát triển nền tảng EdTech (Công nghệ Giáo dục):</strong> Nhu cầu cao về các kỹ sư phát triển phần mềm, ứng dụng học tập, và website tương tác trực tuyến cho phép người học truy cập tài nguyên 24/7.</li>
+                     <li><strong>Xây dựng hệ thống học trực tuyến (E-learning):</strong> Thiết kế và quản lý các LMS (Learning Management System), lớp học ảo, và các công cụ mô phỏng.</li>
+                     <li><strong>Ứng dụng AI và Dữ liệu lớn (Big Data):</strong> Sử dụng dữ liệu trực tuyến để phân tích xu hướng học tập, cá nhân hóa nội dung giảng dạy, và hỗ trợ giáo viên.</li>
+                     <li><strong>Phát triển nội dung số và đa phương tiện:</strong> Tạo ra các tài liệu học tập tương tác, video bài giảng, và các tài nguyên đa phương tiện hấp dẫn.</li>
+                     <li><strong>Bảo mật và quản trị hệ thống:</strong> Đảm bảo an toàn thông tin cho học sinh, sinh viên và quản lý hạ tầng mạng của các tổ chức giáo dục.</li>
+                  </ul>
+               </div>
+            </div>
+         </section>
+
+         <!-- Panel 5: Kết luận -->
+         <section class="content-panel" id="panel-ketluan">
+            <div class="panel-header">
+               <h1>Kết luận</h1>
+               <p>Đúc kết và đề xuất hướng phát triển</p>
+            </div>
+            <div class="panel-body">
+               <div class="content-section">
+                  <p>Công nghệ thông tin đóng vai trò quan trọng trong sự phát triển của nền giáo dục hiện nay. Nhân lực CNTT trong giáo dục có nhiều cơ hội phát triển nhưng cũng đối mặt với nhiều thách thức về kỹ năng và công nghệ.</p>
+                  <h3>Đề xuất hướng phát triển:</h3>
+                  <ul>
+                     <li>Nhà trường cần đầu tư vào đào tạo nhân lực CNTT chất lượng cao.</li>
+                     <li>Khuyến khích học sinh, sinh viên tham gia các khóa học trực tuyến về lập trình và bảo mật thông tin.</li>
+                     <li>Phát triển các phần mềm học tập miễn phí cho vùng sâu, vùng xa.</li>
+                     <li>Ứng dụng AI và Big Data để cá nhân hóa nội dung học tập.</li>
+                  </ul>
+                   <video class="content-video" src="assest/video.mp4" controls></video>
+               </div>
+            </div>
+         </section>
+
+      </main>
+   </div>
+
+
+   <!-- Modal hiển thị ảnh phóng to -->
+   <div id="imageModal" class="image-modal">
+      <span class="close-modal">&times;</span>
+      <img class="modal-content" id="imgFull">
+   </div>
+
+   <script src="assest/script.js"></script>
+</body>
+</html>
