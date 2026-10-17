@@ -1,0 +1,3 @@
+Dat anh cua ban vao thu muc nay theo ten a1.png, a2.png, a3.png...
+Mo index.html va sua GIFT_PHOTO_COUNT trong ma HTML neu ban co nhieu hon 8 anh.
+Anh chua co se tam hien khung minh hoa mau.
