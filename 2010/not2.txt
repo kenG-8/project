@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Chúc mừng 20/10</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to top, #ffe6ec, #fff);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Bông hoa */
+  .flower {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+    transform: translateY(100px) scale(0.5);
+    animation: rise 2s ease-out forwards;
+  }
+
+  @keyframes rise {
+    0% {opacity: 0; transform: translateY(100px) scale(0.5);}
+    60% {opacity: 1; transform: translateY(-10px) scale(1.1);}
+    100% {transform: translateY(0) scale(1);}
+  }
+
+  .petal {
+    position: absolute;
+    width: 60px;
+    height: 90px;
+    background: radial-gradient(circle at top left, #ff8fab, #ff5b8a);
+    border-radius: 60% 60% 0 0;
+    transform-origin: bottom center;
+    opacity: 0;
+    animation: bloom 1.5s ease-in-out forwards;
+  }
+
+  @keyframes bloom {
+    from {transform: scale(0) rotate(var(--angle)); opacity: 0;}
+    to {transform: scale(1) rotate(var(--angle)); opacity: 1;}
+  }
+
+  .center {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #ffd966, #ffb700);
+    border-radius: 50%;
+    box-shadow: 0 0 15px #fff59d;
+    opacity: 0;
+    animation: appear 1s ease-in 1.2s forwards;
+  }
+
+  @keyframes appear {
+    to {opacity: 1;}
+  }
+
+  .message {
+    font-size: 2em;
+    color: #d63384;
+    opacity: 0;
+    margin-top: 40px;
+    animation: showText 2s ease-in 3s forwards;
+  }
+
+  @keyframes showText {
+    to {opacity: 1;}
+  }
+</style>
+</head>
+<body>
+  <div class="flower" id="flower">
+    <!-- 8 cánh hoa xoay quanh -->
+    <div class="petal" style="--angle:0deg;"></div>
+    <div class="petal" style="--angle:45deg;"></div>
+    <div class="petal" style="--angle:90deg;"></div>
+    <div class="petal" style="--angle:135deg;"></div>
+    <div class="petal" style="--angle:180deg;"></div>
+    <div class="petal" style="--angle:225deg;"></div>
+    <div class="petal" style="--angle:270deg;"></div>
+    <div class="petal" style="--angle:315deg;"></div>
+    <div class="center"></div>
+  </div>
+
+  <div class="message">💐 Chúc mừng Ngày Phụ nữ Việt Nam 20/10 💖</div>
+
+  <script>
+    // Sau 6 giây tự động chuyển sang trang 2
+    setTimeout(() => {
+      window.location.href = "gallery.html";
+    }, 6000);
+  </script>
+</body>
+</html>

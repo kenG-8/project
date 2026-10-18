@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Passcode</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 60%, #f06292 100%);
+            padding: 20px 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Floating hearts background */
+        body::before,
+        body::after {
+            content: '♥';
+            position: fixed;
+            font-size: 120px;
+            color: rgba(255, 255, 255, 0.08);
+            animation: floatHeart 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        body::after {
+            bottom: 10%;
+            right: 5%;
+            animation-delay: 4s;
+            font-size: 80px;
+        }
+
+        @keyframes floatHeart {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-10deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 30px;
+            display: flex;
+            gap: 30px;
+            align-items: stretch;
+            box-shadow:
+                0 20px 60px rgba(233, 30, 99, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            width: 90%;
+            position: relative;
+        }
+
+
+        /* Left side - Image */
+        .img-section {
+            flex: 1;
+            min-width: 220px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(233, 30, 99, 0.2);
+        }
+
+        .img-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .img-section:hover img {
+            transform: scale(1.05);
+        }
+
+        .img-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(233, 30, 99, 0.15));
+            pointer-events: none;
+        }
+
+        /* Right side - Passcode section */
+        .passs {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        /* Heart icon */
+        .heart-icon {
+            font-size: 36px;
+            color: #e91e63;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 2px 8px rgba(233, 30, 99, 0.4));
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.15);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.1);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+        }
+
+        /* Passcode dots */
+        .passradio {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
+
+        .passradio i {
+            font-size: 14px;
+            color: #f06292;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .passradio i.fa-solid {
+            color: #e91e63;
+            transform: scale(1.3);
+            filter: drop-shadow(0 0 6px rgba(233, 30, 99, 0.5));
+        }
+
+        /* Number pad */
+        .password {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 220px;
+        }
+
+        .password button {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(145deg, rgba(252, 228, 236, 0.9), rgba(248, 187, 208, 0.6));
+            color: #ad1457;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: 'Quicksand', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 4px 15px rgba(233, 30, 99, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            justify-self: center;
+        }
+
+        .password button:hover {
+            background: linear-gradient(145deg, #f8bbd0, #f48fb1);
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.25);
+        }
+
+        .password button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 8px rgba(233, 30, 99, 0.15);
+        }
+
+        .password button.zero-btn {
+            grid-column: 1 / 2;
+        }
+
+        .password button.del-btn {
+            background: linear-gradient(145deg, rgba(255, 205, 210, 0.7), rgba(239, 154, 154, 0.5));
+            color: #c62828;
+            font-size: 18px;
+        }
+
+        .password button.del-btn:hover {
+            background: linear-gradient(145deg, #ef9a9a, #e57373);
+            color: #fff;
+        }
+
+        /* Bottom play button */
+        .play-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e91e63, #f06292);
+            color: white;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(233, 30, 99, 0.5);
+        }
+
+        /* Shake animation for wrong password */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-6px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(6px);
+            }
+        }
+
+        .passradio.shake {
+            animation: shake 0.5s ease;
+        }
+
+        .passradio.shake i {
+            color: #ef5350 !important;
+        }
+
+        /* Success animation */
+        @keyframes successPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .passradio.success i {
+            color: #e91e63 !important;
+            animation: successPulse 0.4s ease;
+            filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.6));
+        }
+
+        /* Fade out transition */
+        body.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                align-items: center;
+                padding-top: 20px;
+            }
+
+            .container {
+                flex-direction: column;
+                padding: 20px;
+                margin: 20px auto;
+                width: 95%;
+            }
+
+            .img-section {
+                min-width: unset;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Left: Image -->
+        <div class="img-section">
+            <img src="assset/img/a1.jpg" alt="photo">
+        </div>
+
+        <!-- Right: Passcode -->
+        <div class="passs">
+            <div class="heart-icon">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+
+            <div class="passradio" id="passradio">
+                <i class="fa-regular fa-circle" id="dot0"></i>
+                <i class="fa-regular fa-circle" id="dot1"></i>
+                <i class="fa-regular fa-circle" id="dot2"></i>
+                <i class="fa-regular fa-circle" id="dot3"></i>
+            </div>
+
+            <div class="password" id="numpad">
+                <button type="button" onclick="pressKey('1')">1</button>
+                <button type="button" onclick="pressKey('2')">2</button>
+                <button type="button" onclick="pressKey('3')">3</button>
+                <button type="button" onclick="pressKey('4')">4</button>
+                <button type="button" onclick="pressKey('5')">5</button>
+                <button type="button" onclick="pressKey('6')">6</button>
+                <button type="button" onclick="pressKey('7')">7</button>
+                <button type="button" onclick="pressKey('8')">8</button>
+                <button type="button" onclick="pressKey('9')">9</button>
+                <button type="button" class="zero-btn" onclick="pressKey('0')">0</button>
+                <button type="button" class="del-btn" onclick="deleteKey()"><i
+                        class="fa-solid fa-delete-left"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Play button -->
+    <button class="play-btn">
+        <i class="fa-solid fa-play"></i>
+    </button>
+
+    <script>
+        const CORRECT_PASS = '0803';
+        let currentInput = '';
+
+        function updateDots() {
+            for (let i = 0; i < 4; i++) {
+                const dot = document.getElementById('dot' + i);
+                if (i < currentInput.length) {
+                    dot.className = 'fa-solid fa-circle';
+                } else {
+                    dot.className = 'fa-regular fa-circle';
+                }
+            }
+        }
+
+        function pressKey(num) {
+            if (currentInput.length >= 4) return;
+
+            currentInput += num;
+            updateDots();
+
+            // Check when 4 digits entered
+            if (currentInput.length === 4) {
+                setTimeout(() => {
+                    if (currentInput === CORRECT_PASS) {
+                        // Success
+                        const radio = document.getElementById('passradio');
+                        radio.classList.add('success');
+                        setTimeout(() => {
+                            // Fade out and redirect in same tab
+                            document.body.classList.add('fade-out');
+                            setTimeout(() => {
+                                window.location.href = 'home.html';
+                            }, 500);
+                        }, 800);
+                    } else {
+                        // Wrong password - shake & reset
+                        const radio = document.getElementById('passradio');
+                        radio.classList.add('shake');
+                        setTimeout(() => {
+                            radio.classList.remove('shake');
+                            currentInput = '';
+                            updateDots();
+                        }, 600);
+                    }
+                }, 200);
+            }
+        }
+
+        function deleteKey() {
+            if (currentInput.length > 0) {
+                currentInput = currentInput.slice(0, -1);
+                updateDots();
+            }
+        }
+    </script>
+</body>
+
+</html>

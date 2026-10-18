@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm TOO HIGH - Chào mừng</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e6bc6;
+            --primary-glow: rgba(46, 107, 198, 0.5);
+            --white: #ffffff;
+            --text-main: #1e293b;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), 
+                        url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+                    
+            color: var(--white);
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 40px;
+            max-width: 650px;
+            width: 90%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: slideUpFade 1.2s ease-out forwards;
+        }
+
+        .avatar-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--primary-color), #87b2f0);
+            box-shadow: 0 0 20px var(--primary-glow);
+            animation: pulse 3s infinite;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--white);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            color: #e2e8f0;
+            font-weight: 300;
+        }
+
+        .btn-discover {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 10px 25px var(--primary-glow);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-discover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-discover:hover::before {
+            left: 100%;
+        }
+
+        .btn-discover:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px var(--primary-glow);
+            background: #255eb3;
+        }
+
+        .btn-discover:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-discover i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-discover:hover i {
+            transform: translateX(5px);
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 107, 198, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(46, 107, 198, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 107, 198, 0); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            p { font-size: 0.95rem; }
+            .container { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="avatar-container">
+            <img src="assest/img/avatar.png" alt="Logo">
+        </div>
+        <h1>Sản phẩm TOO HIGH</h1>
+        <p>Cơ hội và thách thức của nhân lực công nghệ thông tin trong lĩnh vực giáo dục hiện đại. Khám phá cách công nghệ thay đổi tương lai của thế hệ trẻ.</p>
+        <button class="btn-discover" id="btnEnter">
+            Bắt đầu khám phá <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('btnEnter').addEventListener('click', () => {
+            // Hiệu ứng fade out khi chuyển trang
+            document.querySelector('.container').style.opacity = '0';
+            document.querySelector('.container').style.transform = 'translateY(-20px)';
+            document.querySelector('.container').style.transition = 'all 0.5s ease-in';
+            
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
